@@ -21,4 +21,8 @@ public class CommentService {
     public List<CommentEntity> getCommentList(int eventId){
         return commentDao.findAllByEventId(eventId);
     }
+
+    public void createComment(CommentEntity comment){
+        commentDao.save(comment);
+    }
 }

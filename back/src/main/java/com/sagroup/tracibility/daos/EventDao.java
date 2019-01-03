@@ -18,10 +18,13 @@ public interface EventDao extends JpaRepository<EventEntity, String>, JpaSpecifi
 
     EventEntity findByEventId(int eventId);
 
+    EventEntity findByEventTitle(String title);
+
     List<EventEntity> findAll();
 
     List<EventEntity> findAllByEventId(int eventId);
 
     @Transactional
     void deleteByEventId(int eventId);
+
 }

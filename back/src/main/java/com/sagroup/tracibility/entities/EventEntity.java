@@ -59,4 +59,15 @@ public class EventEntity {
     public void setEventTitle(String eventTitle) {
         this.eventTitle = eventTitle;
     }
+
+    public EventEntity(String eventTitle,String eventIntro) {
+        this.eventTitle = eventTitle;
+        this.eventIntro = eventIntro;
+    }
+
+    public EventEntity(int eventId,String eventTitle, String eventIntro) {
+        this.eventId=eventId;
+        this.eventTitle = eventTitle;
+        this.eventIntro = eventIntro;
+    }
 }

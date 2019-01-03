@@ -1,7 +1,6 @@
 package com.sagroup.tracibility.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * @Description:
@@ -38,7 +37,7 @@ public class EventNodeEntity {
     private int negativeFever;
 
     @Column(name="event_node_time")
-    private Date eventNodeTime;
+    private String eventNodeTime;
 
     public int getEventId() {
         return eventId;
@@ -72,11 +71,11 @@ public class EventNodeEntity {
         this.eventNodeId = eventNodeId;
     }
 
-    public Date getEventNodeTime() {
+    public String getEventNodeTime() {
         return eventNodeTime;
     }
 
-    public void setEventNodeTime(Date eventNodeTime) {
+    public void setEventNodeTime(String eventNodeTime) {
         this.eventNodeTime = eventNodeTime;
     }
 
@@ -110,5 +109,32 @@ public class EventNodeEntity {
 
     public void setPositiveFever(int positiveFever) {
         this.positiveFever = positiveFever;
+    }
+
+    public EventNodeEntity() {
+
+    }
+
+    public EventNodeEntity(int eventId, int eventNodeFever, String eventNodeTitle, String eventNodeDescription, int positiveFever, int neutralFever, int negativeFever, String eventNodeTime) {
+        this.eventId = eventId;
+        this.eventNodeFever = eventNodeFever;
+        this.eventNodeTitle = eventNodeTitle;
+        this.eventNodeDescription = eventNodeDescription;
+        this.positiveFever = positiveFever;
+        this.neutralFever = neutralFever;
+        this.negativeFever = negativeFever;
+        this.eventNodeTime = eventNodeTime;
+    }
+
+    public EventNodeEntity(int eventNodeId,int eventId, int eventNodeFever, String eventNodeTitle, String eventNodeDescription, int positiveFever, int neutralFever, int negativeFever, String eventNodeTime) {
+        this.eventNodeId=eventNodeId;
+        this.eventId = eventId;
+        this.eventNodeFever = eventNodeFever;
+        this.eventNodeTitle = eventNodeTitle;
+        this.eventNodeDescription = eventNodeDescription;
+        this.positiveFever = positiveFever;
+        this.neutralFever = neutralFever;
+        this.negativeFever = negativeFever;
+        this.eventNodeTime = eventNodeTime;
     }
 }

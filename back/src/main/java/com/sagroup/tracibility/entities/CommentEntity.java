@@ -1,7 +1,6 @@
 package com.sagroup.tracibility.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * @Description:
@@ -24,16 +23,16 @@ public class CommentEntity {
     private int eventId;
 
     @Column(name="comment_time")
-    private Date commentTime;
+    private String commentTime;
 
     @Column(name="comment_content")
     private String commentContent;
 
     @Column(name="report_flag")
-    private boolean reportFlag; //举报标志
+    private int reportFlag; //举报标志
 
     @Column(name="typical_flag")
-    private boolean typicalFlag;
+    private int typicalFlag;
 
     @Column(name="report_reason")
     private String reportReason;
@@ -54,28 +53,12 @@ public class CommentEntity {
         this.commentId = commentId;
     }
 
-    public Date getCommentTime() {
-        return commentTime;
-    }
-
-    public void setCommentTime(Date commentTime) {
-        this.commentTime = commentTime;
-    }
-
     public int getEventId() {
         return eventId;
     }
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
-    }
-
-    public boolean isReportFlag() {
-        return reportFlag;
-    }
-
-    public void setReportFlag(boolean reportFlag) {
-        this.reportFlag = reportFlag;
     }
 
     public String getReportReason() {
@@ -86,19 +69,59 @@ public class CommentEntity {
         this.reportReason = reportReason;
     }
 
-    public boolean isTypicalFlag() {
-        return typicalFlag;
-    }
-
-    public void setTypicalFlag(boolean typicalFlag) {
-        this.typicalFlag = typicalFlag;
-    }
-
     public int getUserId() {
         return userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public CommentEntity() {
+    }
+
+    public String getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(String commentTime) {
+        this.commentTime = commentTime;
+    }
+
+    public int getReportFlag() {
+        return reportFlag;
+    }
+
+    public void setReportFlag(int reportFlag) {
+        this.reportFlag = reportFlag;
+    }
+
+    public int getTypicalFlag() {
+        return typicalFlag;
+    }
+
+    public void setTypicalFlag(int typicalFlag) {
+        this.typicalFlag = typicalFlag;
+    }
+
+    public CommentEntity(int userId, int eventId, String commentTime, String commentContent, int reportFlag, int typicalFlag, String reportReason) {
+        this.userId = userId;
+        this.eventId = eventId;
+        this.commentTime = commentTime;
+        this.commentContent = commentContent;
+        this.reportFlag = reportFlag;
+        this.typicalFlag = typicalFlag;
+        this.reportReason = reportReason;
+    }
+
+    public CommentEntity(int commentId, int userId, int eventId, String commentTime, String commentContent, int reportFlag, int typicalFlag, String reportReason) {
+        this.commentId=commentId;
+        this.userId = userId;
+        this.eventId = eventId;
+        this.commentTime = commentTime;
+        this.commentContent = commentContent;
+        this.reportFlag = reportFlag;
+        this.typicalFlag = typicalFlag;
+        this.reportReason = reportReason;
     }
 }

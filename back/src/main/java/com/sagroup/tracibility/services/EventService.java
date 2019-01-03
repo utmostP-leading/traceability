@@ -74,4 +74,9 @@ public class EventService {
     public EventEntity getEvent(int eventId){
         return eventDao.findByEventId(eventId);
     }
+
+    public int createEvent(EventEntity eventEntity){
+        eventDao.save(eventEntity);
+        return eventDao.findByEventTitle(eventEntity.getEventTitle()).getEventId();
+    }
 }

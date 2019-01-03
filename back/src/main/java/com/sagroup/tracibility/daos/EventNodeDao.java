@@ -16,4 +16,5 @@ import java.util.List;
 public interface EventNodeDao extends JpaRepository<EventNodeEntity, String>, JpaSpecificationExecutor<EventNodeEntity> {
 
     List<EventNodeEntity> findAllByEventId(int eventId);
+
 }

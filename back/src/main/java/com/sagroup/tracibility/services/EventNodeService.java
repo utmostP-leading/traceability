@@ -21,4 +21,8 @@ public class EventNodeService {
     public List<EventNodeEntity> getEventNodeList(int eventId){
         return eventNodeDao.findAllByEventId(eventId);
     }
+
+    public void createEventNode(EventNodeEntity eventNode){
+        eventNodeDao.save(eventNode);
+    }
 }
