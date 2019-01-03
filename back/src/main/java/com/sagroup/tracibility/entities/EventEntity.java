@@ -13,8 +13,8 @@ public class EventEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="even_id")
-    private int evenId;
+    @Column(name="event_id")
+    private int eventId;
 
     @Column(name="event_title")
     private String eventTitle;
@@ -25,4 +25,38 @@ public class EventEntity {
     @Column(name="subscription_num")
     private int subscriptionNum;
 
+    public EventEntity() {
+    }
+
+    public int getSubscriptionNum() {
+        return subscriptionNum;
+    }
+
+    public void setSubscriptionNum(int subscriptionNum) {
+        this.subscriptionNum = subscriptionNum;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getEventIntro() {
+        return eventIntro;
+    }
+
+    public void setEventIntro(String eventIntro) {
+        this.eventIntro = eventIntro;
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
 }

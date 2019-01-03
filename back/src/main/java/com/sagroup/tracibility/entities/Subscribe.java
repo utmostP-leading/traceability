@@ -16,13 +16,42 @@ public class Subscribe {
     @Column(name="id")
     private int id;
 
-//    @ManyToOne
-//    @JoinColumn(name="user_id",nullable = false)
     @Column(name="user_id")
     private int userId;
 
-//    @ManyToOne
-//    @JoinColumn(name="event_id",nullable = false)
     @Column(name="event_id")
     private int eventId;
+
+    public Subscribe() {
+    }
+
+    public Subscribe(int userId,int eventId) {
+        this.userId = userId;
+        this.eventId=eventId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
 }
+
