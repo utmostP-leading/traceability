@@ -3,10 +3,7 @@ package com.sagroup.tracibility.controllers;
 import com.sagroup.tracibility.entities.EventEntity;
 import com.sagroup.tracibility.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +30,17 @@ public class EventManagerController {
         Map<String , Object> data = new HashMap<String ,Object>();
         data.put("statusCode",200);
         data.put("eventList",eventList);
+        return data;
+    }
+
+    //CRD
+    @DeleteMapping("event/{eventId}")
+    @ResponseBody
+    public Map<String, Object> deleteEvent(@PathVariable int eventId){
+        eventService.deleteEvent(eventId);
+        //返回数据
+        Map<String , Object> data = new HashMap<String ,Object>();
+        data.put("statusCode",204);
         return data;
     }
 }

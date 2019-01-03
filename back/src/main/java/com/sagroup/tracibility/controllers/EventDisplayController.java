@@ -1,7 +1,11 @@
 package com.sagroup.tracibility.controllers;
 
+import com.sagroup.tracibility.entities.CommentEntity;
 import com.sagroup.tracibility.entities.EventEntity;
+import com.sagroup.tracibility.entities.EventNodeEntity;
 import com.sagroup.tracibility.entities.Subscribe;
+import com.sagroup.tracibility.services.CommentService;
+import com.sagroup.tracibility.services.EventNodeService;
 import com.sagroup.tracibility.services.EventService;
 import com.sagroup.tracibility.services.SubcriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,10 @@ public class EventDisplayController {
     private EventService eventService;
     @Autowired
     private SubcriptionService subcriptionService;
+    @Autowired
+    private EventNodeService eventNodeService;
+    @Autowired
+    private CommentService commentService;
 
     //CRD
     @GetMapping("recEvents")
@@ -47,6 +55,22 @@ public class EventDisplayController {
         Map<String , Object> data = new HashMap<String ,Object>();
         data.put("statusCode",200);
         data.put("subEventList",subEventList);
+        return data;
+    }
+
+    //CRD
+    @GetMapping("eventDetails/{eventId}")
+    @ResponseBody
+    public Map<String, Object> getEvent(@PathVariable int eventId){
+        EventEntity event=eventService.getEvent(eventId);
+        List<EventNodeEntity> eventNodeList=eventNodeService.getEventNodeList(eventId);
+        List<CommentEntity> commentList=commentService.getCommentList(eventId);
+        //返回数据
+        Map<String , Object> data = new HashMap<String ,Object>();
+        data.put("statusCode",200);
+        data.put("event",event);
+        data.put("eventNodeList",eventNodeList);
+        data.put("commentList",commentList);
         return data;
     }
 }

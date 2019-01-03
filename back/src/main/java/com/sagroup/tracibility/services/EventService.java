@@ -66,4 +66,12 @@ public class EventService {
         }
         return subEventList;
     }
+
+    public void deleteEvent(int eventId){
+        eventDao.deleteByEventId(eventId);
+    }
+
+    public EventEntity getEvent(int eventId){
+        return eventDao.findByEventId(eventId);
+    }
 }

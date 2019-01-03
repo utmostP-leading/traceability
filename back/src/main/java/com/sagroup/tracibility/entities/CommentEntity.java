@@ -37,4 +37,68 @@ public class CommentEntity {
 
     @Column(name="report_reason")
     private String reportReason;
+
+    public String getCommentContent() {
+        return commentContent;
+    }
+
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
+
+    public int getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
+    }
+
+    public Date getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(Date commentTime) {
+        this.commentTime = commentTime;
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public boolean isReportFlag() {
+        return reportFlag;
+    }
+
+    public void setReportFlag(boolean reportFlag) {
+        this.reportFlag = reportFlag;
+    }
+
+    public String getReportReason() {
+        return reportReason;
+    }
+
+    public void setReportReason(String reportReason) {
+        this.reportReason = reportReason;
+    }
+
+    public boolean isTypicalFlag() {
+        return typicalFlag;
+    }
+
+    public void setTypicalFlag(boolean typicalFlag) {
+        this.typicalFlag = typicalFlag;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

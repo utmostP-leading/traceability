@@ -4,6 +4,7 @@ import com.sagroup.tracibility.entities.EventEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,4 +21,7 @@ public interface EventDao extends JpaRepository<EventEntity, String>, JpaSpecifi
     List<EventEntity> findAll();
 
     List<EventEntity> findAllByEventId(int eventId);
+
+    @Transactional
+    void deleteByEventId(int eventId);
 }
