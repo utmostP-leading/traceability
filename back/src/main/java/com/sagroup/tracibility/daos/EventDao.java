@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @Description:
  * @Author: 潘浩霖
@@ -14,4 +16,8 @@ import org.springframework.stereotype.Repository;
 public interface EventDao extends JpaRepository<EventEntity, String>, JpaSpecificationExecutor<EventEntity> {
 
     EventEntity findByEventId(int eventId);
+
+    List<EventEntity> findAll();
+
+    List<EventEntity> findAllByEventId(int eventId);
 }

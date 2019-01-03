@@ -5,6 +5,8 @@ import com.sagroup.tracibility.entities.Subscribe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Description:
  * @Author: 潘浩霖
@@ -23,5 +25,9 @@ public class SubcriptionService {
 
     public void cancelSubscription(int userId,int eventId){
         subscriptionDao.deleteByUserIdAndEventId(userId,eventId);
+    }
+
+    public List<Subscribe> getSubEvents(int userId){
+        return subscriptionDao.findAllByUserId(userId);
     }
 }

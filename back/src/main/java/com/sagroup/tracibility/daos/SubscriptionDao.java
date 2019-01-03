@@ -20,4 +20,6 @@ public interface SubscriptionDao extends JpaRepository<Subscribe, String>, JpaSp
 
     @Transactional
     void deleteByUserIdAndEventId(int userId,int eventId);
+
+    List<Subscribe> findAllByUserId(int userId);
 }

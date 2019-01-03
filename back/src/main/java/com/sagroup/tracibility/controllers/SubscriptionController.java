@@ -22,6 +22,7 @@ public class SubscriptionController {
     @Autowired
     private EventService eventService;
 
+    //CRD
     @PostMapping("subscribe")
     @ResponseBody
     public Map<String, Object> addSubscription(@RequestBody Map map){
@@ -32,13 +33,13 @@ public class SubscriptionController {
                 Integer.parseInt(map.get("eventId").toString().trim()));
         //更新事件订阅数
         eventService.increaseEventSubNum(Integer.parseInt(map.get("userId").toString().trim()));
-
         //返回数据
         Map<String , Object> data = new HashMap<String ,Object>();
         data.put("statusCode","201");
         return data;
     }
 
+    //CRD
     @DeleteMapping("subscribe")
     @ResponseBody
     public Map<String, Object> cancelSubscription(@RequestBody Map map){
@@ -49,7 +50,6 @@ public class SubscriptionController {
                 Integer.parseInt(map.get("eventId").toString().trim()));
         //更新事件订阅数
         eventService.decreaseEventSubNum(Integer.parseInt(map.get("userId").toString().trim()));
-
         //返回数据
         Map<String , Object> data = new HashMap<String ,Object>();
         data.put("statusCode","204");
