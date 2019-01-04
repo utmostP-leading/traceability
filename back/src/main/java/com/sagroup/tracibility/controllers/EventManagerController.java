@@ -6,6 +6,7 @@ import com.sagroup.tracibility.entities.EventNodeEntity;
 import com.sagroup.tracibility.services.CommentService;
 import com.sagroup.tracibility.services.EventNodeService;
 import com.sagroup.tracibility.services.EventService;
+import com.sagroup.tracibility.services.SubcriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,8 @@ public class EventManagerController {
     private EventNodeService eventNodeService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private SubcriptionService subcriptionService;
 
     //CRD
     @GetMapping("events")
@@ -91,15 +94,16 @@ public class EventManagerController {
                 map.get("eventTitle").toString(),
                 map.get("eventIntro").toString());
         eventService.createEvent(event);
+        subcriptionService.updateReadFlag(event.getEventId());
 
-        List<Map> list=(ArrayList<Map>)map.get("eventNodeList");
+                    List<Map> list=(ArrayList<Map>)map.get("eventNodeList");
         for(int i=0;i<list.size();i++){
-            if(Integer.parseInt(list.get(i).get("eventNodeId").toString())==0){
-                EventNodeEntity eventNode=new EventNodeEntity(
-                        Integer.parseInt(list.get(i).get("eventId").toString()),
-                        Integer.parseInt(list.get(i).get("eventNodeFever").toString()),
-                        list.get(i).get("eventNodeTitle").toString(),
-                        list.get(i).get("eventNodeDescription").toString(),
+                        if(Integer.parseInt(list.get(i).get("eventNodeId").toString())==0){
+                            EventNodeEntity eventNode=new EventNodeEntity(
+                                    Integer.parseInt(list.get(i).get("eventId").toString()),
+                                    Integer.parseInt(list.get(i).get("eventNodeFever").toString()),
+                                    list.get(i).get("eventNodeTitle").toString(),
+                                    list.get(i).get("eventNodeDescription").toString(),
                         Integer.parseInt(list.get(i).get("positiveFever").toString()),
                         Integer.parseInt(list.get(i).get("neutralFever").toString()),
                         Integer.parseInt(list.get(i).get("negativeFever").toString()),

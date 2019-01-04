@@ -22,12 +22,16 @@ public class Subscribe {
     @Column(name="event_id")
     private int eventId;
 
+    @Column(name="read_flag")
+    private int read_flag;
+
     public Subscribe() {
     }
 
-    public Subscribe(int userId,int eventId) {
+    public Subscribe(int userId,int eventId,int read_flag) {
         this.userId = userId;
         this.eventId=eventId;
+        this.read_flag=read_flag;
     }
 
     public int getId() {
@@ -44,6 +48,14 @@ public class Subscribe {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getRead_flag() {
+        return read_flag;
+    }
+
+    public void setRead_flag(int read_flag) {
+        this.read_flag = read_flag;
     }
 
     public int getEventId() {

@@ -19,7 +19,7 @@ public class SubcriptionService {
     private SubscriptionDao subscriptionDao;
 
     public void addSubscription(int userId,int eventId){
-        Subscribe subscribe=new Subscribe(userId,eventId);
+        Subscribe subscribe=new Subscribe(userId,eventId,1);
         subscriptionDao.save(subscribe);
     }
 
@@ -29,5 +29,13 @@ public class SubcriptionService {
 
     public List<Subscribe> getSubEvents(int userId){
         return subscriptionDao.findAllByUserId(userId);
+    }
+
+    public void updateReadFlag(int eventId){
+        List<Subscribe> subscribeList=subscriptionDao.findAllByEventId(eventId);
+        for(int i=0;i<subscribeList.size();i++){
+            subscribeList.get(i).setRead_flag(0);
+            subscriptionDao.save(subscribeList.get(i));
+        }
     }
 }

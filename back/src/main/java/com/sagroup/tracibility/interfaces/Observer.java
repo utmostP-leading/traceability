@@ -5,5 +5,5 @@ package com.sagroup.tracibility.interfaces;
  * @Author: 潘浩霖
  * @Date: 2018/12/29
  */
-public class Observer {
+public interface Observer {
 }
