@@ -21,7 +21,6 @@ import java.util.Map;
  * @Date: 2018/12/29
  */
 @RestController
-@RequestMapping("v1")
 public class EventDisplayController {
 
     @Autowired

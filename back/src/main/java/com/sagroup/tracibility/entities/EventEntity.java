@@ -1,5 +1,7 @@
 package com.sagroup.tracibility.entities;
 
+import com.sagroup.tracibility.interfaces.Observable;
+
 import javax.persistence.*;
 
 /**
@@ -9,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="event")
-public class EventEntity {
+public class EventEntity implements Observable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

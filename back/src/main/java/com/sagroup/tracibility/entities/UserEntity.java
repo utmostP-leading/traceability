@@ -1,6 +1,7 @@
 package com.sagroup.tracibility.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sagroup.tracibility.interfaces.Observer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,7 +16,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "user")
 @JsonIgnoreProperties(value = {"password"})
-public class UserEntity implements UserDetails{
+public class UserEntity implements UserDetails, Observer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
