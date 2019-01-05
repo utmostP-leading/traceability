@@ -7,11 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @Description:
- * @Author: 潘浩霖
- * @Date: 2018/12/29
- */
+
 @Service
 public class CommentService {
 
@@ -25,4 +21,19 @@ public class CommentService {
     public void createComment(CommentEntity comment){
         commentDao.save(comment);
     }
+
+    public void deleteComment(int commentId){
+        commentDao.deleteByCommentId(commentId);
+    }
+
+    public CommentEntity getCommentByCommentId(int commentId){return commentDao.findByCommentId(commentId);}
+
+    public void changeCommentState(CommentEntity comment){commentDao.save(comment);}
+
+    public List<CommentEntity> getAllTipComments(){
+        List<CommentEntity> commentList=commentDao.findAllByReportFlag(1);
+        return commentList;
+    }
+
+
 }

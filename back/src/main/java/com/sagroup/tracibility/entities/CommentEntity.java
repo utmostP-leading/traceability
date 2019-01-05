@@ -4,8 +4,7 @@ import javax.persistence.*;
 
 /**
  * @Description:
- * @Author: 潘浩霖
- * @Date: 2018/12/29
+ * @Author: 娼樻旦闇? * @Date: 2018/12/29
  */
 @Entity
 @Table(name="comment")
@@ -29,7 +28,7 @@ public class CommentEntity {
     private String commentContent;
 
     @Column(name="report_flag")
-    private int reportFlag; //举报标志
+    private int reportFlag;
 
     @Column(name="typical_flag")
     private int typicalFlag;
@@ -123,5 +122,14 @@ public class CommentEntity {
         this.reportFlag = reportFlag;
         this.typicalFlag = typicalFlag;
         this.reportReason = reportReason;
+    }
+
+    public CommentEntity( int userId, int eventId,String commentContent, String commentTime, int reportFlag, int typicalFlag){
+        this.userId = userId;
+        this.eventId = eventId;
+        this.commentContent = commentContent;
+        this.commentTime = commentTime;
+        this.reportFlag = reportFlag;
+        this.typicalFlag = typicalFlag;
     }
 }
