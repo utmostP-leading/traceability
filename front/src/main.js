@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
-//import store from './store'
-import axios from 'axios'
-import routes from './router'
-import Antd from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
 
+import VueRouter from 'vue-router'
+import routes from './router'
+
+import Antd from 'ant-design-vue'
+import "ant-design-vue/dist/antd.css";
+
+import axios from 'axios'
+//import store from './store'
 
 Vue.config.productionTip = false
 
