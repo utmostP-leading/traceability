@@ -11,11 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- * @Description:
- * @Author: 潘浩霖
- * @Date: 2018/12/29
- */
+
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
@@ -50,4 +46,15 @@ public class UserService implements UserDetailsService {
 //        };
         return new BCryptPasswordEncoder();
     }
+
+    //yxe
+    public UserEntity findByUserId (int userId){
+        UserEntity userProfile=userDao.findById(userId);
+        return userProfile;
+    }
+
+    public void changeUserProfiles(UserEntity profile){
+        userDao.save(profile);
+    }
+
 }
