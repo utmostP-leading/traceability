@@ -36,7 +36,7 @@
               
               <a-row  v-for="item in eventNodeList" :gutter='16' style="border: 2px; margin-bottom: 10px ">
                     <a-col :span='6'><a-input v-model="item.eventNodeTitle"/></a-col>
-                    <a-col :span='6'><a-input v-model="item.eventNodeTime"/></a-col>
+                    <a-col :span='6'><a-input v-model="item.eventNodeTime" placeholder="格式如2000-01-01"/></a-col>
                     <a-col :span='6'><a-input v-model="item.eventNodeFever"/></a-col>
                     <a-col :span='6'><a-input v-model="item.eventNodeDescription"/></a-col>
               </a-row> 
@@ -185,6 +185,7 @@ export default {
             axios({
                 method: 'post',
                 url: '/event',
+                
                 data: {
                     eventTitle: it.event_name,
                     eventIntro: it.event_intro,

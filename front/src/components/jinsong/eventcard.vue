@@ -14,7 +14,7 @@
 
       <a-col :span="8" v-for="item in event_card">
         <a-card :title="item.eventTitle" :bordered="true" style="width: 300px">
-          <p>{{item.eventDescription}}</p>
+          <p>{{item.eventIntro}}</p>
           <div>
             <a-button-group style="bottom: 0; width: 100%">
               <router-link to = '/addEvent'>
@@ -68,7 +68,7 @@ const datasource = [
 export default {
   data: function(){
     return{
-      event_card: ''
+      event_card: []
     }
   },
   created:function(){
@@ -92,7 +92,10 @@ export default {
       // })
       axios({
         method: 'delete',
-        url: '/event/' + e,
+        url: '/event',
+        params:{
+          eventId: e
+          }
         
       })
     }

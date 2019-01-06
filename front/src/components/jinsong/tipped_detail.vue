@@ -6,7 +6,7 @@
     </a-layout-header>
 
     <a-layout style="margin-top: 70px">
-        <side-nav/>
+        <side-nav></side-nav>
         <a-layout-content :style="{ padding: '0 70px'}">
             <div :style="{ background: '#fff',  minHeight: '100px' }">
             <div style="fontWeight: 'bold'; padding-top: 20px">评论列表/详情</div>
@@ -14,17 +14,19 @@
             </div>
             <div style="background: #fff ;fontWeight: 'bold'">
                 <div style="margin-bottom: 10px">评论编号：{{$route.params.tipped_id}}</div>
-                <div style="margin-bottom: 10px">
+                <!-- <div style="margin-bottom: 10px">
                 <span style="margin-right: 200px">评论时间：</span><span>举报时间: </span>
-                </div>
+                </div> -->
                 <div style="margin-bottom: 10px">评论内容：{{tipped_msg.content}}</div>
                 <div style="margin-bottom: 10px">举报原因：{{tipped_msg.tipReason}}</div>
                 <a-divider></a-divider>
             </div>
             
             <div style="background: #fff">
-                <a-button type='primary' @click="agree">同意</a-button>
-                <a-button>否决</a-button>
+                <a-button-group>
+                <a-button type='primary' @click="pass(tipped_ID)">同意</a-button>
+                <a-button type='primary' @click="reject(tipped_ID)">否决</a-button>
+                </a-button-group>
             </div>
         </a-layout-content>
     </a-layout>
@@ -39,34 +41,56 @@ export default {
         return{
             tipped_ID: this.$route.params.tipped_id,
             tipped_msg: {
-                CommentId: tipped_ID,
+                CommentId: this.tipped_ID,
                 content: '',
                 tipReason: ''
             }
         }
     },
     methods:{
-        agree:function(){
-
-        }
+        pass: function(e) {
+        var it = this
+        axios({
+          method: 'patch',
+          url: '/tippedComments',
+          data: {
+            commentId: e
+          }
+        })
+      },
+      reject: function(e){
+        var it = this
+        axios({
+          method: 'patch',
+          url: '/nonTippedComments',
+          data: {
+            commentId: e
+          }
+        })
+      }
     },
     components:{
         topNav,
         sideNav
     },
     created:function(){
+        console.log(this.$route.params.tipped_id)
         var it = this
         axios({
             method: 'get',
-            url: '/tippedDetails/' + it.tipped_ID,
+            url: '/tippedDetails/',
+            params:{
+                commentId: it.$route.params.tipped_id
+            }
             
         }).then(res=>{
             console.log(res.statusCode)
             it.tipped_msg.CommentId = res.commentId,
             it.tipped_msg.content = res.content,
-            it,tipped_msg.tipReason = res.tipReason
+            it.tipped_msg.tipReason = res.tippedReason
         })
 
     }
+
 }
 </script>

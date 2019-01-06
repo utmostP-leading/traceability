@@ -13,9 +13,9 @@
                    <td >被举报的用户</td>
                    <a-divider type="vertical" />
                    <!-- <td >举报人</td>
-                   <a-divider type="vertical" />
-                   <td >举报时间</td>
                    <a-divider type="vertical" /> -->
+                   <td >评论时间</td>
+                   <a-divider type="vertical" />
                    <td >操作</td>
                  </tr>
                  <tr v-for="item in tipped_comments" style="margin-bottom: 15px">
@@ -28,9 +28,9 @@
                    <td>{{item.userId}}</td>
                    <a-divider type="vertical" />
                    <!-- <td>{{item.tip_user}}</td>
-                   <a-divider type="vertical" />
-                   <td>{{item.tip_time}}</td>
                    <a-divider type="vertical" /> -->
+                   <td>{{item.commentTime}}</td>
+                   <a-divider type="vertical" />
                    <td>
                      <button @click="pass(item.commentId)">同意</button>
                      <button @click="reject(item.commentId)">否决</button>
@@ -61,7 +61,8 @@ const datasource = [{
 export default {
     data:function(){
         return{
-            tipped_comments: '',
+            tipped_comments: [],
+            
             tipped_item: '未审核举报'
         }
     },
@@ -79,18 +80,15 @@ export default {
     },
     methods: {
       pass: function(e) {
-        var it = this
         axios({
           method: 'patch',
           url: '/tippedComments',
-
           data: {
             commentId: e
           }
         })
       },
       reject: function(e){
-        var it = this
         axios({
           method: 'patch',
           url: '/nonTippedComments',
@@ -105,7 +103,7 @@ export default {
 
 <style>
 td{
-  min-width:180px;
+  min-width:150px;
 }
 </style>
 
