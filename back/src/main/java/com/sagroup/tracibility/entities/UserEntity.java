@@ -20,8 +20,8 @@ public class UserEntity implements UserDetails, Observer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    @Column(name="user_id")
+    private int userId;
 
     @Column(name="username")
     private String username;
@@ -50,8 +50,8 @@ public class UserEntity implements UserDetails, Observer {
         return null;
     }
 
-    public int getId(){return id;}
-    public void setId(int id){this.id=id;}
+    public int getUserId(){return userId;}
+    public void setUserId(int id){this.userId=id;}
 
     public void setPassword(String password) {
         this.password = password;

@@ -39,6 +39,7 @@ public class EventManagerController {
         List<EventEntity> eventList=eventService.getAllEvents();
         //返回数据
         Map<String , Object> data = new HashMap<String ,Object>();
+        System.out.println(data);
         data.put("statusCode",200);
         data.put("eventList",eventList);
         return data;

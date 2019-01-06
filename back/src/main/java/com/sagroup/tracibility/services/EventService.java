@@ -60,7 +60,6 @@ public class EventService {
 
     public List<EventEntity> getAllSubEvents(List<Subscribe> subEventIdList){
         List<EventEntity> subEventList=new ArrayList<>();
-        System.out.print("输出"+subEventIdList.get(1));
         for(int i=0;i<subEventIdList.size();i++){
             subEventList.add(eventDao.findByEventId(subEventIdList.get(i).getEventId()));
         }

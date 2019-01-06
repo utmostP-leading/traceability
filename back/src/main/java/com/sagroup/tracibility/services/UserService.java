@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
 
     //yxe
     public UserEntity findByUserId (int userId){
-        UserEntity userProfile=userDao.findById(userId);
+        UserEntity userProfile=userDao.findByUserId(userId);
         return userProfile;
     }
 
