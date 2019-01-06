@@ -74,7 +74,7 @@ export default {
       url: '/events',
     }).then(res=>{
       console.log(res.statusCode)
-      it.event_card = res.eventList
+      it.event_card = res.data.eventList
     })
   },
   methods:{

@@ -78,16 +78,14 @@ export default {
         var it = this
         axios({
             method: 'get',
-            url: '/tippedDetails/',
-            params:{
-                commentId: it.$route.params.tipped_id
-            }
+            url: '/tippedDetails/' + it.$route.params.tipped_id,
+            
             
         }).then(res=>{
             console.log(res.statusCode)
-            it.tipped_msg.CommentId = res.commentId,
-            it.tipped_msg.content = res.content,
-            it.tipped_msg.tipReason = res.tippedReason
+            it.tipped_msg.CommentId = res.data.commentId,
+            it.tipped_msg.content = res.data.content,
+            it.tipped_msg.tipReason = res.data.tippedReason
         })
 
     }

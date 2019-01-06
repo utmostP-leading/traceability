@@ -73,8 +73,8 @@ export default {
         url: '/tippedList',
 
       }).then(res=>{
-        console.log(res.statusCode)
-        it.tipped_comments = res.tipped_comment
+        console.log(res.data.statusCode)
+        it.tipped_comments = res.data.tipped_comment
         
       })
     },
