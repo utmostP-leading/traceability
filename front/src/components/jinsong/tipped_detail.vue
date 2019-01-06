@@ -58,7 +58,7 @@ export default {
         var it = this
         axios({
             method: 'get',
-            url: 'tippedDetails/' + it.tipped_ID,
+            url: '/tippedDetails/' + it.tipped_ID,
             
         }).then(res=>{
             console.log(res.statusCode)

@@ -184,7 +184,7 @@ export default {
             var it = this
             axios({
                 method: 'post',
-                url: 'event',
+                url: '/event',
                 data: {
                     eventTitle: it.event_name,
                     eventIntro: it.event_intro,

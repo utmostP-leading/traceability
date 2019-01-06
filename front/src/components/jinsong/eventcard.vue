@@ -68,16 +68,17 @@ const datasource = [
 export default {
   data: function(){
     return{
-      event_card: datasource
+      event_card: ''
     }
   },
   created:function(){
     var it = this
     axios({
       method: 'get',
-      url: 'events',
+      url: '/events',
     }).then(res=>{
-      it.event_card = res
+      console.log(res.statusCode)
+      it.event_card = res.eventList
     })
   },
   methods:{
@@ -91,7 +92,7 @@ export default {
       // })
       axios({
         method: 'delete',
-        url: 'event/' + e,
+        url: '/event/' + e,
         
       })
     }

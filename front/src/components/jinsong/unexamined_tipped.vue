@@ -69,7 +69,7 @@ export default {
       var it = this
       axios({
         method: 'get',
-        url: 'tippedList',
+        url: '/tippedList',
 
       }).then(res=>{
         console.log(res.statusCode)
@@ -82,7 +82,8 @@ export default {
         var it = this
         axios({
           method: 'patch',
-          url: 'tippedComments',
+          url: '/tippedComments',
+
           data: {
             commentId: e
           }
@@ -92,7 +93,7 @@ export default {
         var it = this
         axios({
           method: 'patch',
-          url: 'nonTippedComments',
+          url: '/nonTippedComments',
           data: {
             commentId: e
           }
