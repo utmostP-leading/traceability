@@ -4,28 +4,25 @@
     <div style="vertical-align: middle">
       <div
         class="components-input-demo-presuffix"
-        style="text-align:center; margin-top:400px; margin-left:30px; margin-right:30px"
+        style="text-align:center; margin-top:380px; margin-left:30px; margin-right:30px"
       >
-        <a-input style="width:20%" placeholder="手机号" v-model="phone" ref="phoneInput">
-          <a-icon slot="prefix" type="phone"/>
-          <a-icon v-if="phone" slot="suffix" type="close-circle" @click="emitEmpty"/>
-        </a-input>
+        <a-input style="width:20%" placeholder="用户名" v-model="username"></a-input>
       </div>
       <div class="components-input-demo-presuffix" style="text-align:center; margin:30px">
-        <a-input style="width:20% " placeholder="密码" v-model="password" ref="passwordInput">
-          <a-icon slot="prefix" type="lock"/>
-          <a-icon v-if="lock" slot="suffix" type="close-circle" @click="emitEmpty"/>
-        </a-input>
+        <a-input
+          style="width:20% "
+          placeholder="6-16位密码，区分大小写"
+          v-model="password"
+          ref="passwordInput"
+        ></a-input>
       </div>
-      <div style="margin-top:0px; margin-bottom:10px">
-        <a href style="padding-left:56%">忘记密码</a>
+      <div class="components-input-demo-presuffix" style="text-align:center; margin:30px">
+        <a-input style="width:20% " placeholder="确认密码" v-model="password"></a-input>
       </div>
-      <div style="text-align:center">
-        <a-button type="primary" style="width:19%;">登录</a-button>
-      </div>
-      <div style="margin-top:20px;">
+      <div style="margin-left:41%">
+        <a-button type="primary" style="width:15%;" @click="signUp">注册</a-button>
         <router-link to="/signin">
-          <a style="padding-left:56%">注册账户</a>
+          <a style="padding-left:5%">使用已有账户登录</a>
         </router-link>
       </div>
     </div>
@@ -34,18 +31,34 @@
 
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      phone: ""
+      username: null,
+      password: null
     };
   },
   methods: {
-    emitEmpty() {
-      this.$refs.phoneInput.focus();
-      this.phone = "";
-      this.$refs.passwordInput.focus();
-      this.password = "";
+    signUp() {
+      axios({
+        method: "post",
+        url: "/register",
+        transformRequest: [
+          function(data) {
+            let newData = "";
+            for (let k in data) {
+              newData +=
+                encodeURIComponent(k) + "=" + encodeURIComponent(data[k]) + "&";
+            }
+            return newData;
+          }
+        ],
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      }).then(res => {});
     }
   }
 };

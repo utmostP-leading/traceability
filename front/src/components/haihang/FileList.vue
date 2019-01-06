@@ -1,15 +1,13 @@
 <template>
   <div style="height:100%;width:100%;background-color:cyan">
     <a-menu v-model="current" mode="horizontal" theme="dark">
-      <a-menu-item style="margin-left:20%; width:10%;text-align:center" key="mail">
-        <router-link to="/signup">首页</router-link>
+      <a-menu-item style="margin-left:20%; width:10%;text-align:center" key="home">
+        <router-link to="/recommandlist">首页</router-link>
       </a-menu-item>
-      <a-menu-item style="width:10%; text-align:center" key="app">
+      <a-menu-item style="width:10%; text-align:center" key="list">
         <router-link to="/filelist">热点列表</router-link>
       </a-menu-item>
-      <a-menu-item style="width:10%; text-align:center" key="alipay">
-      事件详情
-      </a-menu-item>
+      <a-menu-item style="width:10%; text-align:center" key="detail">事件详情</a-menu-item>
       <router-link to="/information">
         <a-avatar style="margin-left:35%" icon="user"/>
       </router-link>
@@ -28,16 +26,11 @@
         </a-layout-sider>
         <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
           <a-card title="热点">
-            <p
-              style="fontSize: 14px;color: rgba(0, 0, 0, 0.85); marginBottom: 16px;fontWeight: 500"
-            >Group title</p>
-            <a-card title="Inner card title">
-              <a  slot="extra"><router-link to="/filedetail">详情</router-link></a>
-              Inner Card content
-            </a-card>
-            <a-card title="Inner card title" :style="{ marginTop: '16px' }">
-              <a  slot="extra"><router-link to="/filedetail">详情</router-link></a>
-              Inner Card content
+            <a-card :title="item.eventTitle" v-for="item in event_card">
+              <a slot="extra">
+                <router-link to="/filedetail">详情</router-link>
+              </a>
+              {{item.eventIntro}}
             </a-card>
           </a-card>
         </a-layout-content>
@@ -46,11 +39,33 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+import store from '../../store'
 export default {
   data() {
     return {
-      current: ["9"]
+      current: ["list"],
+      event_card: ""
     };
+  },
+
+  mounted() {
+    this.eventInit();
+    console.log("userInfo",this.$store.state.userInfo);
+  },
+
+  methods: {
+
+    eventInit() {
+      axios
+        .get("subEvents/2")
+        .then(res => {
+          this.event_card = res.data.subEventList;
+          console.log(this.event_card);
+        })
+        .catch(e => console.log(e));
+      console.log("获取事件列表完毕");
+    }
   }
 };
 </script>

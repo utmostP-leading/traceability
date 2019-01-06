@@ -10,6 +10,7 @@ import tipped from '../components/jinsong/tipped.vue'
 import detail from '../components/jinsong/tipped_detail.vue'
 import unexamined from '../components/jinsong/unexamined_tipped.vue'
 import examined from '../components/jinsong/examined_tipped.vue'
+import RecommandList from "../components/haihang/RecommandList.vue"
 
 let routers = [
     {
@@ -57,6 +58,11 @@ let routers = [
         path:'/addEvent',
         name:'add_event',
         component:add_event
+    },
+    {
+        path:"/recommandlist",
+        component:RecommandList,
+        name:"recommandlist"
     },
     {
         path:'/tipped',

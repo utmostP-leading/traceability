@@ -4,37 +4,28 @@
     <div style="vertical-align: middle">
       <div
         class="components-input-demo-presuffix"
-        style="text-align:center; margin-top:380px; margin-left:30px; margin-right:30px"
+        style="text-align:center; margin-top:400px; margin-left:30px; margin-right:30px"
       >
-        <a-input style="width:20%" placeholder="邮箱" v-model="email" ref="emailInput"></a-input>
+        <a-input style="width:20%" placeholder="用户名" v-model="username">
+          <a-icon slot="prefix" type="phone"/>
+          <a-icon v-if="phone" slot="suffix" type="close-circle"/>
+        </a-input>
       </div>
       <div class="components-input-demo-presuffix" style="text-align:center; margin:30px">
-        <a-input
-          style="width:20% "
-          placeholder="6-16位密码，区分大小写"
-          v-model="password"
-          ref="passwordInput"
-        ></a-input>
+        <a-input style="width:20% " placeholder="密码" v-model="password">
+          <a-icon slot="prefix" type="lock"/>
+          <a-icon v-if="lock" slot="suffix" type="close-circle"/>
+        </a-input>
       </div>
-      <div class="components-input-demo-presuffix" style="text-align:center; margin:30px">
-        <a-input style="width:20% " placeholder="确认密码" v-model="password" ref="passwordInput"></a-input>
+      <div style="margin-top:0px; margin-bottom:10px">
+        <a href style="padding-left:56%">忘记密码</a>
       </div>
-      <div class="components-input-demo-presuffix" style="text-align:center; margin:30px">
-        <a-input style="width:20% " placeholder="11位手机号" v-model="phone" ref="phoneInput"></a-input>
+      <div style="text-align:center">
+        <a-button type="primary" style="width:19%;" @click="signIn">登录</a-button>
       </div>
-      <div class="components-input-demo-presuffix" style="text-align:center; margin:30px">
-        <a-input
-          style="width:10% ; margin-right:35px"
-          placeholder="输入验证码"
-          v-model="password"
-          ref="passwordInput"
-        ></a-input>
-        <a-button style="width:8%;">获取验证码</a-button>
-      </div>
-      <div style="margin-left:41%">
-        <a-button type="primary" style="width:15%;">注册</a-button>
+      <div style="margin-top:20px;">
         <router-link to="/signup">
-          <a style="padding-left:5%">使用已有账户登录</a>
+          <a style="padding-left:56%">注册账户</a>
         </router-link>
       </div>
     </div>
@@ -43,20 +34,39 @@
 
 
 <script>
+import axios from "axios";
+import store from '../../store'
 export default {
   data() {
     return {
-      email: ""
+      username: null,
+      password: null,
+      errcode: null
     };
   },
   methods: {
-    emitEmpty() {
-      this.$refs.emailInput.focus();
-      this.email = "";
-      this.$refs.passwordInput.focus();
-      this.password = "";
-      this.$refs.phoneInput.focus();
-      this.phone = "";
+    signIn() {
+      axios({
+        method: "post",
+        url: "/login",
+        transformRequest: [
+          function(data) {
+            let newData = "";
+            for (let k in data) {
+              newData +=
+                encodeURIComponent(k) + "=" + encodeURIComponent(data[k]) + "&";
+            }
+            return newData;
+          }
+        ],
+        data: {
+          username: this.username,
+          password: this.password
+        }
+      }).then(res => {
+        this.errcode =res.errCode;
+        store.commit("setUserInfo",res.data);
+      });
     }
   }
 };
