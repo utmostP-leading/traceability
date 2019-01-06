@@ -28,15 +28,17 @@
           <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '20px'}">事件趋势</div>
           <div class="trend">
               <a-row :gutter="16" style="border: 2px;margin-bottom: 10px " >
-                    <a-col :span="8">时间</a-col>
-                    <a-col :span='8'>热度</a-col>
-                    <a-col :span='8'>描述</a-col>
+                    <a-col :span="6">事件节点名称</a-col>
+                    <a-col :span="6">时间</a-col>
+                    <a-col :span='6'>热度</a-col>
+                    <a-col :span='6'>描述</a-col>
               </a-row>
               
-              <a-row  v-for="item in trend_dataset" :gutter='16' style="border: 2px; margin-bottom: 10px ">
-                    <a-col :span='8'><a-input v-model="item.time"/></a-col>
-                    <a-col :span='8'><a-input v-model="item.hot"/></a-col>
-                    <a-col :span='8'><a-input v-model="item.desc"/></a-col>
+              <a-row  v-for="item in eventNodeList" :gutter='16' style="border: 2px; margin-bottom: 10px ">
+                    <a-col :span='6'><a-input v-model="item.eventNodeTitle"/></a-col>
+                    <a-col :span='6'><a-input v-model="item.eventNodeTime"/></a-col>
+                    <a-col :span='6'><a-input v-model="item.eventNodeFever"/></a-col>
+                    <a-col :span='6'><a-input v-model="item.eventNodeDescription"/></a-col>
               </a-row> 
           </div> 
           <div>
@@ -64,52 +66,63 @@
           <a-divider></a-divider>
 
           <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '20px'}">
-            <a-row :gutter="16" style="border: 2px;margin-bottom: 10px " >
-                        <a-col :span="12">时间</a-col>
+            <div style="display:inline">积极情感</div>
+          </div>
+
+          <a-divider></a-divider>
+
+          <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '15px'}">
+              
+              <a-row :gutter="16" style="border: 2px;margin-bottom: 10px " >
+                        <a-col :span="12">事件节点名称</a-col>
                         <a-col :span='12'>热度</a-col>
-            </a-row>
+              </a-row>
+              <a-row  v-for="item in eventNodeList" :gutter='16' style="border: 2px; margin-bottom: 10px ">
+                    <a-col :span='12'><a-input v-model="item.eventNodeTitle"/></a-col>
+                    
+                    <a-col :span='12'><a-input v-model="item.positiveFever"/></a-col>
+              </a-row> 
+              
           </div>
 
           <a-divider></a-divider>
 
+          
+
+          <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '20px'}">
+            <div style="display:inline">消极情感</div>
+          </div>
+          <a-divider></a-divider>
+
           <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '15px'}">
-              <div style="display:inline">积极情感</div>
-              <a-row  v-for="item in active_emotion" :gutter='16' style="border: 2px; margin-bottom: 10px ">
-                    <a-col :span='12'><a-input v-model="item.time"/></a-col>
-                    <a-col :span='12'><a-input v-model="item.hot"/></a-col>
+              <a-row :gutter="16" style="border: 2px;margin-bottom: 10px " >
+                        <a-col :span="12">事件节点名称</a-col>
+                        <a-col :span='12'>热度</a-col>
+              </a-row>
+              <a-row  v-for="item in eventNodeList" :gutter='16' style="border: 2px; margin-bottom: 10px ">
+                    <a-col :span='12'><a-input v-model="item.eventNodeTitle"/></a-col>
+                    <a-col :span='12'><a-input v-model="item.negativeFever"/></a-col>
               </a-row> 
-              <div>
-                  <button @click="add_active_input">新建</button>
-                  <button @click="delete_active_input">删除</button>
-              </div>
+              
           </div>
 
           <a-divider></a-divider>
 
-          <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '15px'}">
-              <div style="display:inline">消极情感</div>
-              <a-row  v-for="item in passive_emotion" :gutter='16' style="border: 2px; margin-bottom: 10px ">
-                    <a-col :span='12'><a-input v-model="item.time"/></a-col>
-                    <a-col :span='12'><a-input v-model="item.hot"/></a-col>
-              </a-row> 
-              <div>
-                  <button @click="add_passive_input">新建</button>
-                  <button @click="delete_passive_input">删除</button>
-              </div>
+          <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '20px'}">
+            <div style="display:inline">中立情感</div>
           </div>
-
           <a-divider></a-divider>
 
           <div :style="{margin: '15px 0', fontWeight: 'bold', fontSize: '15px'}">
-              <div style="display:inline">中立情感</div>
-              <a-row  v-for="item in netural_emotion" :gutter='16' style="border: 2px; margin-bottom: 10px ">
-                    <a-col :span='12'><a-input v-model="item.time"/></a-col>
-                    <a-col :span='12'><a-input v-model="item.hot"/></a-col>
+              <a-row :gutter="16" style="border: 2px;margin-bottom: 10px " >
+                        <a-col :span="12">事件节点名称</a-col>
+                        <a-col :span='12'>热度</a-col>
+              </a-row>
+              <a-row  v-for="item in eventNodeList" :gutter='16' style="border: 2px; margin-bottom: 10px ">
+                    <a-col :span='12'><a-input v-model="item.eventNodeTitle"/></a-col>
+                    <a-col :span='12'><a-input v-model="item.neturalFever"/></a-col>
               </a-row> 
-              <div>
-                  <button @click="add_netural_input">新建</button>
-                  <button @click="delete_netural_input">删除</button>
-              </div>
+              
           </div>
       </div>
     </a-layout-content>
@@ -135,27 +148,15 @@ export default {
         return {
             event_name: '',
             event_intro: '',
-            trend_dataset:[
-                {time:'', hot:'', desc:''},
-                {time:'', hot:'', desc:''},
-                {time:'', hot:'', desc:''},
-                {time:'', hot:'', desc:''},
-            ],
-            active_emotion: [
-                {time: '', hot: ''},
-                {time: '', hot: ''},
-                {time: '', hot: ''}
-            ],
-            passive_emotion: [
-                {time: '', hot: ''},
-                {time: '', hot: ''},
-                {time: '', hot: ''}
-            ],
-            netural_emotion: [
-                {time: '', hot: ''},
-                {time: '', hot: ''},
-                {time: '', hot: ''}
-            ]
+            eventNodeList: [{
+                eventNodeTitle: '',
+                eventNodeFever: '',
+                eventNodeDescription: '',
+                eventNodeTime: '',
+                positiveFever: '',
+                neturalFever: '',
+                negativeFever: ''
+            }]
 
         }
     },
@@ -165,44 +166,32 @@ export default {
     },
     methods:{
         add_input:function(){
-            this.trend_dataset.push({time:'', hot:'', desc:''})
+            this.eventNodeList.push({
+                eventNodeTitle: '',
+                eventNodeFever: '',
+                eventNodeDescription: '',
+                eventNodeTime: '',
+                positiveFever: '',
+                neturalFever: '',
+                negativeFever: ''
+            })
         },
         delete_input: function(){
-            this.trend_dataset.pop()
-        },
-        add_active_input: function(){
-            this.active_emotion.push({time:'', hot:''})
-        },
-        delete_active_input: function(){
-            this.active_emotion.pop()
-        },
-        add_passive_input: function(){
-            this.passive_emotion.push({time:'', hot:''})
-        },
-        delete_passive_input: function(){
-            this.passive_emotion.pop()
-        },
-        add_netural_input: function(){
-            this.netural_emotion.push({time:'', hot:''})
-        },
-        delete_netural_input: function(){
-            this.netural_emotion.pop()
+            this.eventNodeList.pop()
         },
 
         Submit:function(){
             var it = this
             axios({
                 method: 'post',
-                url: '',
+                url: 'event',
                 data: {
-                    event_name: it.event_name,
-                    event_intro: it.event_intro,
-                    trend_dataset: it.trend_dataset,
-                    active_emotion: it.active_emotion,
-                    passive_emotion: it.passive_emotion,
-                    netural_emotion: it.netural_emotion
-
+                    eventTitle: it.event_name,
+                    eventIntro: it.event_intro,
+                    eventNodeList: it.eventNodeList
                 }
+            }).then(res=>{
+                console.log(res)
             })
         }
     }

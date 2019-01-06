@@ -5,7 +5,7 @@
         <a-card title="事件" :bordered="true" style="width: 300px; height: 173px">
           <p></p>
           <div>
-            <router-link to = '/add'>
+            <router-link to = '/addEvent'>
             <a-button style="width:100%" type="primary" :size = 'large'>新增</a-button>
             </router-link>
           </div>
@@ -13,14 +13,14 @@
       </a-col>
 
       <a-col :span="8" v-for="item in event_card">
-        <a-card :title="item.event_name" :bordered="true" style="width: 300px">
-          <p>{{item.event_discribe}}</p>
+        <a-card :title="item.eventTitle" :bordered="true" style="width: 300px">
+          <p>{{item.eventDescription}}</p>
           <div>
             <a-button-group style="bottom: 0; width: 100%">
-              <router-link to = '/add'>
+              <router-link to = '/addEvent'>
               <a-button style="width:50%" type="primary" :size = 'large'>修改</a-button>
               </router-link>
-              <a-button style="width:50%" type="danger" :size = 'large' @click="delete_card(item.event_id)">删除</a-button>
+              <a-button style="width:50%" type="danger" :size = 'large' @click="delete_card(item.eventId)">删除</a-button>
             </a-button-group>
           </div>
         </a-card>
@@ -34,34 +34,34 @@
 import axios from 'axios'
 const datasource = [
   {
-    event_id: 1,
-    event_name: 'agesdgsd',
-    event_discribe: 'sdgnisdgn'
+    eventId: 1,
+    eventTitle: 'agesdgsd',
+    eventDescription: 'sdgnisdgn'
   },
   {
-    event_id:2,
-    event_name: 'agesdgsd',
-    event_discribe: 'sdgnisdgn'
+    eventId: 2,
+    eventTitle: 'agesdgsd',
+    eventDescription: 'sdgnisdgn'
   },
   {
-    event_id:3,
-    event_name: 'agesdgsd',
-    event_discribe: 'sdgnisdgn'
+    eventId: 3,
+    eventTitle: 'agesdgsd',
+    eventDescription: 'sdgnisdgn'
   },
   {
-    event_id:4,
-    event_name: 'agesdgsd',
-    event_discribe: 'sdgnisdgn'
+    eventId: 4,
+    eventTitle: 'agesdgsd',
+    eventDescription: 'sdgnisdgn'
   },
   {
-    event_id:5,
-    event_name: 'agesdgsd',
-    event_discribe: 'sdgnisdgn'
+    eventId: 5,
+    eventTitle: 'agesdgsd',
+    eventDescription: 'sdgnisdgn'
   },
   {
-    event_id:6,
-    event_name: 'agesdgsd',
-    event_discribe: 'sdgnisdgn'
+    eventId: 6,
+    eventTitle: 'agesdgsd',
+    eventDescription: 'sdgnisdgn'
   },
 ]
 
@@ -73,12 +73,12 @@ export default {
   },
   created:function(){
     var it = this
-    // axios({
-    //   method: 'get',
-    //   url: '',
-    // }).then(res=>{
-    //   it.event_card = res
-    // })
+    axios({
+      method: 'get',
+      url: 'events',
+    }).then(res=>{
+      it.event_card = res
+    })
   },
   methods:{
     delete_card: function(e){
@@ -89,13 +89,11 @@ export default {
       //     it.event_card.splice(index, 1)
       //   }
       // })
-      // axios({
-      //   method: 'delete',
-      //   url: '',
-      //   data: {
-      //     delete_ID: e
-      //   }
-      // })
+      axios({
+        method: 'delete',
+        url: 'event/' + e,
+        
+      })
     }
   },
  

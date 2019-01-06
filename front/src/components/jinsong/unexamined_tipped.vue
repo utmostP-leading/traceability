@@ -12,28 +12,28 @@
                    <a-divider type="vertical" />
                    <td >被举报的用户</td>
                    <a-divider type="vertical" />
-                   <td >举报人</td>
+                   <!-- <td >举报人</td>
                    <a-divider type="vertical" />
                    <td >举报时间</td>
-                   <a-divider type="vertical" />
+                   <a-divider type="vertical" /> -->
                    <td >操作</td>
                  </tr>
                  <tr v-for="item in tipped_comments" style="margin-bottom: 15px">
                   
-                   <td><router-link :to="'/detail/' + item.ID">{{item.ID}}</router-link></td>
+                   <td><router-link :to="'/detail/' + item.commentId">{{item.commentId}}</router-link></td>
 
                    <a-divider type="vertical" />
-                   <td>{{item.tipped_content}}</td>
+                   <td>{{item.commentContent}}</td>
                    <a-divider type="vertical" />
-                   <td>{{item.tipped_user}}</td>
+                   <td>{{item.userId}}</td>
                    <a-divider type="vertical" />
-                   <td>{{item.tip_user}}</td>
+                   <!-- <td>{{item.tip_user}}</td>
                    <a-divider type="vertical" />
                    <td>{{item.tip_time}}</td>
-                   <a-divider type="vertical" />
+                   <a-divider type="vertical" /> -->
                    <td>
-                     <button @click="pass(item.ID)">同意</button>
-                     <button @click="reject">否决</button>
+                     <button @click="pass(item.commentId)">同意</button>
+                     <button @click="reject(item.commentId)">否决</button>
                    </td>
                  </tr>
                </table>
@@ -42,6 +42,7 @@
         </a-layout-content>
 </template>
 <script>
+import axios from 'axios'
 const datasource = [{
   key: '1',
   ID: '001',
@@ -60,10 +61,51 @@ const datasource = [{
 export default {
     data:function(){
         return{
-            tipped_comments: datasource,
+            tipped_comments: '',
             tipped_item: '未审核举报'
         }
+    },
+    created:function(){
+      var it = this
+      axios({
+        method: 'get',
+        url: 'tippedList',
+
+      }).then(res=>{
+        console.log(res.statusCode)
+        it.tipped_comments = res.tipped_comment
+        
+      })
+    },
+    methods: {
+      pass: function(e) {
+        var it = this
+        axios({
+          method: 'patch',
+          url: 'tippedComments',
+          data: {
+            commentId: e
+          }
+        })
+      },
+      reject: function(e){
+        var it = this
+        axios({
+          method: 'patch',
+          url: 'nonTippedComments',
+          data: {
+            commentId: e
+          }
+        })
+      }
     }
 }
 </script>
+
+<style>
+td{
+  min-width:180px;
+}
+</style>
+
 

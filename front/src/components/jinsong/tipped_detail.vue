@@ -15,14 +15,10 @@
             <div style="background: #fff ;fontWeight: 'bold'">
                 <div style="margin-bottom: 10px">评论编号：{{$route.params.tipped_id}}</div>
                 <div style="margin-bottom: 10px">
-                <span style="margin-right: 200px">被举报用户：{{$route.params.tipped_id}}</span>
-                <span>举报人: </span>
-                </div>
-                <div style="margin-bottom: 10px">
                 <span style="margin-right: 200px">评论时间：</span><span>举报时间: </span>
                 </div>
-                <div style="margin-bottom: 10px">评论内容：</div>
-                <div style="margin-bottom: 10px">举报原因：</div>
+                <div style="margin-bottom: 10px">评论内容：{{tipped_msg.content}}</div>
+                <div style="margin-bottom: 10px">举报原因：{{tipped_msg.tipReason}}</div>
                 <a-divider></a-divider>
             </div>
             
@@ -43,13 +39,9 @@ export default {
         return{
             tipped_ID: this.$route.params.tipped_id,
             tipped_msg: {
-                tipped_id: tipped_ID,
-                tipped_user: '',
-                tip_user: '',
-                comment_time: '',
-                tipped_time: '',
-                comment: '',
-                tip_reason: ''
+                CommentId: tipped_ID,
+                content: '',
+                tipReason: ''
             }
         }
     },
@@ -66,12 +58,13 @@ export default {
         var it = this
         axios({
             method: 'get',
-            url: '',
-            data:{
-                tipped_id: it.$route.params.tipped_id
-            }
+            url: 'tippedDetails/' + it.tipped_ID,
+            
         }).then(res=>{
-            it.tipped_msg = res
+            console.log(res.statusCode)
+            it.tipped_msg.CommentId = res.commentId,
+            it.tipped_msg.content = res.content,
+            it,tipped_msg.tipReason = res.tipReason
         })
 
     }

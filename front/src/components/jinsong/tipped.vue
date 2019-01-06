@@ -7,8 +7,7 @@
 
     <a-layout style="margin-top: 70px">
         <side-nav></side-nav>
-        <router-view name="unexamined"></router-view>
-        <router-view name="examined"></router-view>
+        <router-view></router-view>
     </a-layout>
   </a-layout>
 </template>
@@ -29,16 +28,13 @@ export default {
   },
   methods: {
 
-    
-    pass: function(e){
-      
-    }
   },
+  created: function(){
+    this.$router.push('/tipped/unexamined')
+  }
 }
 </script>
 
 <style>
-td{
-  min-width:100px;
-}
+
 </style>

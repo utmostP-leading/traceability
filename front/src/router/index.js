@@ -64,11 +64,13 @@ let routers = [
         children:[
             {
                 path:'unexamined',
-                component:unexamined
+                component:unexamined,
+                name: 'unexamined'
             },
             {
                 path:'examined',
-                component:examined
+                component:examined,
+                name: 'examined'
             }]
     },
     {
