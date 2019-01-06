@@ -185,7 +185,9 @@ export default {
             axios({
                 method: 'post',
                 url: '/event',
-                
+                header:{
+                    "Content-Type": 'application/json'
+                },
                 data: {
                     eventTitle: it.event_name,
                     eventIntro: it.event_intro,
