@@ -65,7 +65,7 @@ public class EventManagerController {
         List<EventNodeEntity> eventNodeList=new ArrayList<>();
         List<Map> list=(ArrayList<Map>)map.get("eventNodeList");
 
-        for(int i=0;i<list.size();i++){
+        for(int i=0;i<list.size()-1;i++){
             EventNodeEntity eventNode=new EventNodeEntity(
                     eventId,
                     Integer.parseInt(list.get(i).get("eventNodeFever").toString()),
@@ -126,20 +126,20 @@ public class EventManagerController {
             }
         }
 
-        List<Map> clist=(ArrayList<Map>)map.get("commentList");
-        for(int i=0;i<clist.size();i++){
-            CommentEntity comment=new CommentEntity(
-                    Integer.parseInt(clist.get(i).get("commentId").toString()),
-                    Integer.parseInt(clist.get(i).get("userId").toString()),
-                    Integer.parseInt(clist.get(i).get("eventId").toString()),
-                    clist.get(i).get("commentTime").toString(),
-                    clist.get(i).get("commentContent").toString(),
-                    Integer.parseInt(clist.get(i).get("reportFlag").toString()),
-                    Integer.parseInt(clist.get(i).get("typicalFlag").toString()),
-                    clist.get(i).get("reportReason").toString()
-            );
-            commentService.createComment(comment);
-        }
+//        List<Map> clist=(ArrayList<Map>)map.get("commentList");
+//        for(int i=0;i<clist.size();i++){
+//            CommentEntity comment=new CommentEntity(
+//                    Integer.parseInt(clist.get(i).get("commentId").toString()),
+//                    Integer.parseInt(clist.get(i).get("userId").toString()),
+//                    Integer.parseInt(clist.get(i).get("eventId").toString()),
+//                    clist.get(i).get("commentTime").toString(),
+//                    clist.get(i).get("commentContent").toString(),
+//                    Integer.parseInt(clist.get(i).get("reportFlag").toString()),
+//                    Integer.parseInt(clist.get(i).get("typicalFlag").toString()),
+//                    clist.get(i).get("reportReason").toString()
+//            );
+//            commentService.createComment(comment);
+//        }
 
         //返回数据
         Map<String , Object> data = new HashMap<String ,Object>();

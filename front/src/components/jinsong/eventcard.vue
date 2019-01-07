@@ -17,10 +17,12 @@
           <p>{{item.eventIntro}}</p>
           <div>
             <a-button-group style="bottom: 0; width: 100%">
-              <router-link to = '/addEvent'>
-              <a-button style="width:50%" type="primary" :size = 'large' @click="modify_event(item.eventId)">修改</a-button>
+              <router-link :to = "'/modifyEvent/' + item.eventId">
+              <a-button style="width:50%" type="primary" :size = 'large' >修改</a-button>
               </router-link>
+              
               <a-button style="width:50%" type="danger" :size = 'large' @click="delete_card(item.eventId)">删除</a-button>
+           
             </a-button-group>
           </div>
         </a-card>
@@ -89,10 +91,7 @@ export default {
         onOk(){
           axios({
         method: 'delete',
-        url: '/event',
-        params:{
-          eventId: e
-          }       
+        url: '/event/' + e,       
           })
           it.event_card.forEach(element => {
             if (element.eventId == e){
@@ -105,17 +104,7 @@ export default {
 
         }
       })
-      
     },
-    modify_event: function(e){
-      axios({
-        method: 'delete',
-        url: '/event',
-        params:{
-          eventId: e
-          }       
-      })
-    }
   },
  
 }

@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     //声明全局变量，通过this.$store.state访问
     state: {
-        userInfo:null
+        userInfo:null,
+        eventId:null
     },
     //在getters中声明state中变量的计算函数，缓存计算后的数据，通过this.$store.getters调用
     getters: {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     mutations: {
         setUserInfo(state,userInfo){
             state.userInfo=userInfo
+        },
+        setEventId(state,eventId){
+            state.eventId=eventId
         }
     },
     //以异步方式执行mutations，通过this.$store.dispatch调用

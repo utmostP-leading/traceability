@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;width:100%;background-color:cyan">
+  <div style="height:100%;width:100%;background-color:#1ABC9C">
     <a-menu v-model="current" mode="horizontal" theme="dark">
       <a-menu-item style="margin-left:20%; width:10%;text-align:center" key="home">
         <router-link to="/recommandlist">首页</router-link>
@@ -26,8 +26,8 @@
         </a-layout-sider>
         <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
           <a-card title="推荐事件">
-            <a-card :title="item.eventTitle" v-for="item in event_card">
-              <a slot="extra">
+            <a-card :title="item.eventTitle" v-for="item in event_card" :key="item.eventId">
+              <a slot="extra" @click="setKey">
                 <router-link to="/filedetail">详情</router-link>
               </a>
               {{item.eventIntro}}
@@ -40,16 +40,19 @@
 </template>
 <script>
 import axios from "axios";
+import store from '../../store'
 export default {
   data() {
     return {
       current: ["home"],
-      event_card: ""
+      event_card: "",
+      key:""
     };
   },
 
   mounted() {
     this.eventInit();
+    console.log("userInfo",store.state.userInfo);
   },
 
   methods: {
@@ -62,6 +65,9 @@ export default {
         })
         .catch(e => console.log(e));
       console.log("获取事件列表完毕");
+    },
+    setKey(){
+      store.commit("setEventId",key);
     }
   }
 };

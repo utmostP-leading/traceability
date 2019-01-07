@@ -11,6 +11,8 @@ import detail from '../components/jinsong/tipped_detail.vue'
 import unexamined from '../components/jinsong/unexamined_tipped.vue'
 import examined from '../components/jinsong/examined_tipped.vue'
 import RecommandList from "../components/haihang/RecommandList.vue"
+import modify_event from '../components/jinsong/modify_event.vue'
+
 
 let routers = [
     {
@@ -83,6 +85,11 @@ let routers = [
         path:'/detail/:tipped_id',
         name:'detail',
         component:detail
+    },
+    {
+        path:'/modifyEvent/:eventId',
+        name:'modify_event',
+        component:modify_event
     }
 ];
 export default routers

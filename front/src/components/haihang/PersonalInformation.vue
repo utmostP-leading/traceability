@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;width:100%;background-color:cyan">
+  <div style="height:100%;width:100%;background-color:#1ABC9C">
     <a-menu v-model="current" mode="horizontal" theme="dark">
       <a-menu-item style="margin-left:20%; width:10%;text-align:center" key="home">
         <router-link to="/recommandlist">首页</router-link>
@@ -45,6 +45,7 @@
 </template>
 <script>
 import axios from "axios";
+import store from "../../store";
 export default {
   data() {
     return {
@@ -64,12 +65,12 @@ export default {
   methods: {
     informationInit() {
       axios
-        .get("profiles/2")
+        .get("profiles/"+store.state.userInfo.data.userId)
         .then(res => {
-          (this.nickname = res.userProfile.userName),
-            (this.phone = res.userProfile.userTel),
-            (this.intro = res.userProfile.userIntro),
-            (this.sex = res.userProfile.userSex);
+          (this.nickname = res.data.userProfile.username),
+            (this.phone = res.data.userProfile.tel),
+            (this.intro = res.data.userProfile.intro),
+            (this.sex = res.data.userProfile.sex);
         })
         .catch(e => console.log(e));
       console.log("获取个人信息完毕");
@@ -80,7 +81,7 @@ export default {
         method: "put",
         url: "/profiles",
         data: {
-          userId:"2",
+          userId:store.state.userInfo.data.userId,
           userSex: this.sex,
           userImg:"",
           userTel: this.phone,

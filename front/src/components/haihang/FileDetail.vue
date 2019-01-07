@@ -1,5 +1,5 @@
 <template>
-  <div style="height:300%;width:100%;background-color:cyan">
+  <div style="height:300%;width:100%;background-color:#1ABC9C">
     <a-menu v-model="current" mode="horizontal" theme="dark">
       <a-menu-item style="margin-left:20%; width:10%;text-align:center" key="home">
         <router-link to="/recommandlist">首页</router-link>
@@ -46,22 +46,30 @@
                 </a-timeline>
               </a-layout-sider>
               <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-                <a-card>{{start}}</a-card>
-                <a-card :style="{ marginTop: '16px' }">{{develop}}</a-card>
-                <a-card :style="{ marginTop: '16px' }">{{hightide}}</a-card>
-                <a-card :style="{ marginTop: '16px' }">{{end}}</a-card>
+                <a-card :style="{ marginTop: '16px' }" v-for="item in eventTrend">
+                  时间：{{item.eventNodeTime}}
+                  <br>
+                  内容：{{item.eventNodeDescription}}
+                  <br>
+                  情感倾向：积极{{item.positiveFever}} -- 中立{{item.negativeFever}} -- 消极{{item.neutralFever}}
+                </a-card>
               </a-layout-content>
             </a-card>
-            <a-card title="情感倾向" :style="{ marginTop: '16px' }">Inner Card content</a-card>
+            <a-card title="情感倾向" :style="{ marginTop: '16px' }">暂时没有图</a-card>
             <a-card title="事件评论" :style="{ marginTop: '16px' }">
               <a-avatar style="margin-left:2%" icon="user"/>
-              <a-input style="margin-left:5%; width:60%" v-model="commitReview" placeholder="添加评论"/>
+              <a-input style="margin-left:5%; width:60%" v-model="commitreview" placeholder="添加评论"/>
               <a-button type="primary" style="margin-left:15%; width:7%;" @click="commit">提交</a-button>
-              <a-card :style="{ marginTop: '16px' }">
+              <a-card :style="{ marginTop: '16px' }" v-for="item in comment">
                 <a-card-grid style="width:10%;textAlign:'center'">
                   <a-avatar style="margin-left:2%; margin-top:2%" icon="user"/>
                 </a-card-grid>
-                {{comment.commentContent}}
+                ID：{{item.userId}}
+                <br>
+                内容：{{item.commentContent}}
+                <br>
+                评论时间：{{item.commentTime}}
+                <br>
               </a-card>
             </a-card>
           </a-card>
@@ -73,70 +81,53 @@
 <script>
 import axios from "axios";
 import echarts from "echarts";
+import store from "../../store";
 export default {
   data() {
     return {
       current: ["detail"],
       intro: event.eventIntro,
-      trend: "",
-      develop: "",
-      hightide: "",
-      end: "",
-      review: "",
-      event:null,
-      comment:null,
-      eventTrend:null
+      commitreview:"",
+
+      event: null,
+      comment: null,
+      eventTrend: null
     };
   },
   mounted() {
     this.detailInit();
-    console.log("event:",this.event)
+    console.log("eventId:", store.state.eventId);
     //  this.drawTable();
   },
 
   methods: {
     detailInit() {
-      var that =this;
+      var that = this;
       axios
-        .get("/eventDetails/1")
+        .get("/eventDetails/" + store.state.eventId)
         .then(res => {
           that.comment = res.data.commentList;
           that.event = res.data.event;
           that.eventTrend = res.data.eventNodeList;
-          console.log(res.data.event)
+          console.log(res.data.event);
         })
         .catch(e => console.log(e));
-      console.log("获取个人信息完毕");
+      console.log("获取信息完毕");
     },
+
     commit() {
       axios({
         method: "post",
         url: "/comments",
         data: {
-          userId: 1,
-          eventId: 1,
-          content: "this.commitreview"
+          userId: store.state.userInfo.data.userId,
+          eventId: store.state.eventId,
+          content: this.commitreview
         }
+      }).then(res=>{
+        this.detailInit();
       });
-    },
-
-    // userGet() {
-    //   axios
-    //     .get("/login")
-    //     .then(res => {
-    //       (this.userName= res.data.username)
-    //     })
-    //     .catch(e => console.log(e));
-    // },
-
-    // eventGet() {
-    //   axios
-    //     .get("/subEvents/1")
-    //     .then(res => {
-    //       (this.eventID= res.data.eventId)
-    //     })
-    //     .catch(e => console.log(e));
-    // },
+    }
 
     // drawTable() {
     //   let myChart = echarts.init(document.getElementById("myChart"));
