@@ -11,7 +11,13 @@ export default new Vuex.Store({
     },
     //在getters中声明state中变量的计算函数，缓存计算后的数据，通过this.$store.getters调用
     getters: {
-
+        isLogin(state){
+            if(state.userInfo==null){
+                return false;
+            }else{
+                return true;
+            }
+        }
     },
     //执行同步方法，改变state状态，通过this.$store.commit调用
     mutations: {

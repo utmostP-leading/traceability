@@ -17,7 +17,7 @@ import modify_event from '../components/jinsong/modify_event.vue'
 let routers = [
     {
     path: "/",
-    redirect: "/test"
+    redirect: "/signin"
     },
     //杨海航
     {

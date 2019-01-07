@@ -8,7 +8,7 @@ import Antd from 'ant-design-vue'
 import "ant-design-vue/dist/antd.css";
 
 import axios from 'axios'
-//import store from './store'
+import store from './store'
 
 Vue.config.productionTip = false
 
@@ -23,13 +23,13 @@ const router=new VueRouter({
 //路由守卫
 router.beforeEach(function (to, from, next) {
   //未登录，跳转到登录页
-  // if (!store.state.isLogin) {
-  //   if (to.path === '/login') {
-  //     next()
-  //   } else {
-  //     next('/login')
-  //   }
-  // }
+  if (!store.getters.isLogin) {
+    if (to.path==='/signin'||to.path==='/signup') {
+      next();
+    } else {
+      next('/signin');
+    }
+  }
   next();
 })
 
