@@ -1,16 +1,21 @@
-# traceability
-
-æ–‡ä»¶å¤¹ç»“æ„ï¼š
-
-```python
-traceability		#é¡¹ç›®æ ¹ç›®å½•
-â”œâ”€â”€ LICENSE			#å¼€æºè¯ä¹¦ï¼Œæœ¬é¡¹ç›®ä½¿ç”¨Mozillaè®¸å¯è¯
-â”œâ”€â”€ README.md		#é¡¹ç›®è¯´æ˜
-â””â”€â”€ documents		#é¡¹ç›®æ–‡æ¡£ç›®å½•
-  â”œâ”€â”€conference		#ä¼šè®®å†…å®¹åŠè®°å½•
-  â”œâ”€â”€development	#é¡¹ç›®ç ”å‘æ–‡æ¡£
-  â”œâ”€â”€management		#é¡¹ç›®ç®¡ç†æ–‡æ¡£
-  â”œâ”€â”€prototype		#é¡¹ç›®åŸå‹åŠAxureåº“
-  â””â”€â”€reference		#é¡¹ç›®å‚è€ƒæ–‡æ¡£
-```
-
+traceability
+©À©¤back
+©¦  ©À©¤.idea
+©¦  ©À©¤.mvn
+©¦  ©À©¤src
+©¦  ©¦  ©À©¤main
+©¦  ©¦  ©¦  ©À©¤java
+©¦  ©¦  ©¦  ©¸©¤resources
+©¦  ©¦  ©¦      ©À©¤static
+©¦  ©¦  ©¦      ©¸©¤templates
+©¦  ©¦  ©¸©¤test
+©¦  ©¸©¤target
+©¸©¤front
+?    ©À©¤dist
+?    ©À©¤node_modules
+?    ©À©¤public
+?    ©¸©¤src
+?        ©À©¤assets
+?        ©À©¤components
+?        ©À©¤router
+?        ©¸©¤store
